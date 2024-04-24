@@ -1,0 +1,60 @@
+﻿using AdminWpf.Models.Content.Projects;
+using AdminWpf.ViewModel.Content.Blog;
+using AdminWpf.ViewModel.Content.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace AdminWpf.View
+{
+    /// <summary>
+    /// Логика взаимодействия для ProjectEditWindow.xaml
+    /// </summary>
+    public partial class ProjectEditWindow : Window
+    {
+        public ProjectEditWindow()
+        {
+            InitializeComponent();
+        }
+
+        public ProjectEditWindow(FWProjectViewModel projectViewModel)
+        {
+            InitializeComponent();
+            DataContext = projectViewModel;
+            OkButton.Click += delegate
+            {
+                this.DialogResult = true;
+            };
+        }
+
+        public ProjectEditWindow(FWServiceViewModel serviceViewModel)
+        {
+            InitializeComponent();
+            DataContext = serviceViewModel;
+            OkButton.Click += delegate
+            {
+                this.DialogResult = true;
+            };
+        }
+
+        public ProjectEditWindow(FWBlogItemViewModel blogItemViewModel)
+        {
+            InitializeComponent();
+            DataContext = blogItemViewModel;
+            OkButton.Click += delegate
+            {
+                this.DialogResult = true;
+            };
+        }
+    }
+}

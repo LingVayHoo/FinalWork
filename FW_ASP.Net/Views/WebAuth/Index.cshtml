@@ -1,0 +1,20 @@
+﻿@using AuthServer
+@{
+    ViewData["Title"] = "Погода";
+    Layout = "_Layout";
+}
+
+<section class="panel panel-primary">
+    <div class="panel-heading">Список автомобилей</div>
+    <table class="table table-striped">
+
+        @foreach (WeatherForecast f in Model)
+        {
+            <tr>
+                <th>@f.Date</th>
+                <th>@f.TemperatureC</th>
+                <th>@f.TemperatureF</th>
+            </tr>
+        }
+    </table>
+</section>

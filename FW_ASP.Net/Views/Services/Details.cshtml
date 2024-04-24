@@ -1,0 +1,20 @@
+﻿@using AuthServer.Models.Content.Services
+@model FWService
+@{
+    ViewData["Title"] = "Details";
+    Layout = "_Layout";
+}
+
+<!-- About-->
+<section class="about-section text-center" id="about">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="text-white mb-4">@Model.Title</h2>
+                <p class="text-white-50">@Model.Description</p>
+                <a class="btn btn-primary" href="@Url.Action("Index", "Services")">Назад</a>
+            </div>
+        </div>
+        <img class="img-fluid" src='/lib/img/ipad.png' alt="..." />
+    </div>
+</section>

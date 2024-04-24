@@ -1,0 +1,20 @@
+﻿@if (CustomUser.IsAuthenticated)
+{
+    <div class="btn-group pull-right">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#">@CustomUser.UserName в системе</a></li>
+            <form method="post" asp-controller="WebAuth" asp-action="Logout" id="logoutform" asp-antiforgery="true">
+            <li class="nav-item"><a class="nav-link" href="#" onclick="document.getElementById('logoutform').submit()">Выход</a></li>
+            </form>
+        </ul>
+    </div>
+}
+else
+{
+    <div class="btn-group pull-right">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="/WebAuth/Login">Вход</a></li>
+            <li class="nav-item"><a class="nav-link" href="/WebAuth/Register">Регистрация</a></li>
+        </ul>
+    </div>
+}

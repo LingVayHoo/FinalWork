@@ -1,0 +1,480 @@
+﻿<Window x:Class="AdminWpf.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"        
+        xmlns:local="clr-namespace:AdminWpf" 
+        mc:Ignorable="d"
+        Title="MainWindow" Height="720" Width="1280">
+    <Grid Background="#FF2573F1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="31*"/>
+            <RowDefinition Height="261*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border  Grid.Row="0" Background="#FF2573F1" Margin="0,0,1085,629" Grid.RowSpan="2" />
+        <Border Background="#FF2573F1" Margin="195,0,0,629" Grid.RowSpan="2" />
+        <TabControl Grid.Row="1" TabStripPlacement="Left" >
+            <TabItem x:Name="WT_Tab" Header="Рабочий стол"
+                     Height="25" Width="110" Margin="-2,-2,0,-2">
+                <Grid Background="#FFE5E5E5">
+                    <Grid HorizontalAlignment="Left" Height="72" Margin="98,17,0,0" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="1037*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="11*"/>
+                        </Grid.RowDefinitions>
+                        <Rectangle HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="1111" Fill="#FFDDDDDD" Stroke="#FF707070" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="-72,0,0,0"/>
+                        <TextBox 
+                            x:Name="FilterResult" 
+                            Text="{Binding TotalRequestsDisplayed}"
+                            HorizontalAlignment="Left" 
+                            Margin="2,3,0,0" 
+                            TextWrapping="Wrap" 
+                            VerticalAlignment="Top" 
+                            Width="144" 
+                            Height="15" 
+                            FontSize="10" 
+                            Grid.RowSpan="2" 
+                            Grid.Column="1"/>
+                        <Button 
+                            x:Name="TodayFilterButton" 
+                            
+                            Content="Сегодня" 
+                            HorizontalAlignment="Left" 
+                            Margin="-72,16,0,0" 
+                            VerticalAlignment="Top"
+                            Height="50" 
+                            Width="170" 
+                            Grid.Row="1" 
+                            Grid.ColumnSpan="2"
+                            Command="{Binding ClickToday}"
+                            />
+                        <Button 
+                            x:Name="YesterdayFilterButton" 
+                            Content="Вчера" 
+                            HorizontalAlignment="Left" 
+                            Margin="83,16,0,0" 
+                            VerticalAlignment="Top" 
+                            Height="50" 
+                            Width="170" 
+                            Grid.Row="1" 
+                            Grid.Column="1" 
+                            Command="{Binding ClickYesterday}"
+                            />
+                        <Button 
+                            x:Name="WeekFilterButton" 
+                            Content="Неделя" 
+                            HorizontalAlignment="Left" 
+                            Margin="253,16,0,0" 
+                            VerticalAlignment="Top" 
+                            Height="50" 
+                            Width="170" 
+                            Grid.Row="1" 
+                            Grid.Column="1" 
+                            Command="{Binding ClickWeek}"
+                            />
+                        <Button 
+                            x:Name="MonthFilterButton" 
+                            Content="Месяц" 
+                            HorizontalAlignment="Left" 
+                            Margin="423,16,0,0" 
+                            VerticalAlignment="Top" 
+                            Height="50" 
+                            Width="163" 
+                            Grid.Row="1" 
+                            Grid.Column="1" 
+                            Command="{Binding ClickMonth}"
+                            />
+                        <Rectangle HorizontalAlignment="Left" Height="50" Margin="586,16,0,0" VerticalAlignment="Top" Width="438" Fill="#FFDDDDDD" Stroke="#FF707070" Grid.Row="1" Grid.Column="1"/>
+                        <DatePicker 
+                            x:Name="FromCustomFilter" 
+                            SelectedDate="{Binding Start}"
+                            HorizontalAlignment="Left" 
+                            Margin="592,29,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="120" 
+                            Grid.Row="1" 
+                            Grid.Column="1"/>
+                        <DatePicker 
+                            x:Name="ToCustomFilter"
+                            SelectedDate="{Binding End}"
+                            HorizontalAlignment="Left" 
+                            Margin="724,29,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="120" 
+                            Grid.Row="1" 
+                            Grid.Column="1"/>
+                        <Button 
+                            x:Name="CustomFilterButton" 
+                            Content="Ok" 
+                            HorizontalAlignment="Left" 
+                            Margin="870,31,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="126" 
+                            Background="#FFBDBDBD" 
+                            Grid.Row="1" 
+                            Grid.Column="1" 
+                            Command="{Binding ClickCustom}"
+                            />
+                        <DataGrid 
+                x:Name="WT_DataGrid" 
+                IsSynchronizedWithCurrentItem="True"
+                SelectionMode="Single"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding FWRequests}"
+                IsReadOnly="False" 
+                Margin="-72,93,0,-520" Grid.Row="1" Grid.ColumnSpan="2">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="ID"
+                     Binding="{Binding Id}"
+                     Header="Id"
+                     IsReadOnly="True" Width="150" Visibility="Hidden"/>
+                                <DataGridTextColumn x:Name="CreatedTime"
+                     Binding="{Binding CreatedTime}"
+                     Header="Время заявки"
+                     IsReadOnly="True" Width="150"/>
+                                <DataGridTextColumn x:Name="Name"
+                     Binding="{Binding Name}"
+                     Header="Имя"
+                     IsReadOnly="True" Width="150"/>
+                                <DataGridTextColumn x:Name="Description"
+                     Binding="{Binding Description}"
+                     Header="Текст заявки"
+                     IsReadOnly="False" Width="600"/>
+                                <DataGridTextColumn x:Name="RequestStatus"
+                     Binding="{Binding RequestStatus}"
+                     Header="Статус"
+                     IsReadOnly="True" Width="150"/>
+                            </DataGrid.Columns>
+                            <DataGrid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Редактировать" Click="MenuItemEditClick"/>
+                                </ContextMenu>
+                            </DataGrid.ContextMenu>
+                        </DataGrid>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="HomePage_Tab" 
+                Header="Главная" 
+                Height="25" 
+                Width="110">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/img/bg-masthead-new.jpg"/>
+                    </Grid.Background>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="12*"/>
+                        <ColumnDefinition Width="625*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="59" Margin="488,409,0,0" Stroke="Black" VerticalAlignment="Top" Width="142" Fill="#FF64A19D"/>
+                    <TextBox 
+                        x:Name="MainTitleText" 
+                        Grid.Column="1" 
+                        HorizontalAlignment="Left" 
+                        Margin="315,245,0,0" 
+                        TextWrapping="Wrap" 
+                        Text="{Binding MainTitle}" 
+                        VerticalAlignment="Top" 
+                        Width="487" 
+                        Height="90" 
+                        Background="{x:Null}" 
+                        Foreground="White" 
+                        FontSize="72" 
+                        TextAlignment="Center" 
+                        IsReadOnly="False"/>
+                    <TextBox 
+                        x:Name="QuoteTitleText" 
+                        Grid.Column="1" 
+                        HorizontalAlignment="Left"
+                        Margin="378,340,0,0" 
+                        TextWrapping="Wrap" 
+                        Text="{Binding QuoteTitle}" 
+                        VerticalAlignment="Top" 
+                        Width="360" 
+                        Height="37" 
+                        Background="{x:Null}" 
+                        Foreground="#FFFDFDFD" 
+                        TextAlignment="Center" 
+                        UndoLimit="102" 
+                        FontSize="20" 
+                        IsReadOnly="False"/>
+                    <TextBox 
+                        x:Name="ButtonText" 
+                        Grid.Column="1" 
+                        HorizontalAlignment="Left" 
+                        Margin="499,421,0,0" 
+                        TextWrapping="Wrap" 
+                        Text="{Binding ButtonTitle}" 
+                        VerticalAlignment="Top" 
+                        Width="120" 
+                        Height="34" 
+                        Background="{x:Null}" 
+                        Foreground="#FFFDFDFD" 
+                        TextAlignment="Center" 
+                        FontSize="20" 
+                        SelectionOpacity="5" 
+                        IsReadOnly="False"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="Projects_Tab" 
+                Header="Проекты" 
+                Height="25" 
+                Width="110">
+                <ListView x:Name="Project_ListView"
+                          ItemsSource="{Binding FWProjects, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5" Width="1000">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="300"/>
+                                    <ColumnDefinition Width="400"/>
+                                    <ColumnDefinition Width="300"/>
+                                </Grid.ColumnDefinitions>
+                                <Image 
+                                    Width="400" 
+                                    Grid.Column="1" 
+                                    Stretch="UniformToFill" 
+                                    HorizontalAlignment="Center" 
+                                    Margin="5"
+                                    Source="{Binding ImgPath}">
+
+                                </Image>
+                                <TextBlock 
+                                    FontSize="20" 
+                                    Grid.Column="0"
+                                    TextAlignment="Center"
+                                    Text="{Binding Title}" 
+                                    HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    TextWrapping="Wrap">
+
+                                </TextBlock>
+                                <TextBlock 
+                                    FontSize="20" 
+                                    Grid.Column="2"
+                                    TextAlignment="Center"
+                                    Text="{Binding Description}" 
+                                    HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center"
+                                    TextWrapping="Wrap">
+                                </TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="Project_CreateClick" Header="Добавить" Click="ProjectCreateClick"/>
+                            <MenuItem x:Name="Project_EditClick" Header="Редактировать" Click="ProjectEditClick"/>
+                            <MenuItem x:Name="Project_DeleteClick" Header="Удалить" Click="ProjectDeleteClick"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                </ListView>
+            </TabItem>
+            <TabItem x:Name="Services_Tab" 
+             Header="Услуги" 
+             Height="25" 
+             Width="110">
+                <ListView x:Name="Services_ListView"
+                          ItemsSource="{Binding FWServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5" Width="1000">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="300"/>
+                                    <ColumnDefinition Width="700"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock 
+                    FontSize="20" 
+                    Grid.Column="0"
+                    TextAlignment="Center"
+                    Text="{Binding Title}" 
+                                    TextWrapping="Wrap"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+
+                                </TextBlock>
+                                <TextBlock 
+                    FontSize="20" 
+                    Grid.Column="1"
+                    TextAlignment="Center"
+                    Text="{Binding Description}" 
+                                    TextWrapping="Wrap"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+                                </TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="ServiceAddClick" Header="Добавить" Click="ProjectCreateClick"/>
+                            <MenuItem x:Name="ServiceEditClick" Header="Редактировать" Click="ProjectEditClick"/>
+                            <MenuItem x:Name="ServiceDeleteClick" Header="Удалить" Click="ProjectDeleteClick"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                </ListView>
+            </TabItem>
+            <TabItem x:Name="Blog_Tab" 
+             Header="Блог" 
+             Height="25" 
+             Width="110">
+                <ListView 
+                    x:Name="Blog_ListView"
+                    ItemsSource="{Binding FWAllBlogItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5" Width="1000">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="300"/>
+                                    <ColumnDefinition Width="300"/>
+                                    <ColumnDefinition Width="200"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock 
+                    FontSize="20" 
+                    Grid.Column="0"
+                    TextAlignment="Center"
+                    Text="{Binding Title}" 
+                                    TextWrapping="Wrap"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+
+                                </TextBlock>
+                                <TextBlock 
+                    FontSize="20" 
+                    Grid.Column="1"
+                    TextAlignment="Center"
+                    Text="{Binding ShortDescription}" 
+                                    TextWrapping="Wrap"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+                                </TextBlock>
+                                <TextBlock 
+                    FontSize="20" 
+                    Grid.Column="2"
+                    TextAlignment="Center"
+                    Text="{Binding Description}" 
+                                    TextWrapping="Wrap"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+                                </TextBlock>
+                                <TextBlock 
+                    FontSize="20" 
+                    Grid.Column="3"
+                    TextAlignment="Center"
+                    Text="{Binding PublicationDate}" 
+                                    TextWrapping="Wrap"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+                                </TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="Blog_CreateClick" Header="Добавить" Click="ProjectCreateClick"/>
+                            <MenuItem x:Name="Blog_EditClick" Header="Редактировать" Click="ProjectEditClick"/>
+                            <MenuItem x:Name="Blog_DeleteClick" Header="Удалить" Click="ProjectDeleteClick"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                </ListView>
+            </TabItem>
+            <TabItem x:Name="Contacts_Tab" 
+    Header="Контакты" 
+    Height="25" 
+    Width="110">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/img/bg-masthead-new.jpg"/>
+                    </Grid.Background>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="12*"/>
+                        <ColumnDefinition Width="625*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle 
+                        Grid.Column="1" 
+                        HorizontalAlignment="Left" 
+                        Height="150" 
+                        Margin="44,368,0,0" 
+                        Stroke="Black" 
+                        VerticalAlignment="Top" 
+                        Width="300" 
+                        Fill="#FFF9F9F9"/>
+                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="158,406,0,0" TextWrapping="Wrap" Text="АДРЕС" VerticalAlignment="Top" Width="71" Height="23" FontSize="14" TextAlignment="Center"/>
+                    <TextBox 
+                        Text="{Binding Address, Mode=TwoWay}"
+                        TextWrapping="Wrap"
+                        Grid.Column="1" 
+                        HorizontalAlignment="Left" 
+                        Margin="79,443,0,0" 
+                        VerticalAlignment="Top" 
+                        Width="225" 
+                        Height="57" 
+                        TextAlignment="Center"/>
+                    <Rectangle 
+                        Grid.Column="1" 
+                        HorizontalAlignment="Left" 
+                        Height="150" 
+                        Margin="411,368,0,0" 
+                        Stroke="Black" 
+                        VerticalAlignment="Top" 
+                        Width="300" 
+                        Fill="#FFF9F9F9"/>
+                    <TextBlock 
+                        Grid.Column="1" 
+                        HorizontalAlignment="Left" 
+                        Margin="525,406,0,0" 
+                        TextWrapping="Wrap" 
+                        Text="EMAIL" 
+                        VerticalAlignment="Top" 
+                        Width="71" 
+                        Height="23" 
+                        FontSize="14" 
+                        TextAlignment="Center"/>
+                    <TextBox 
+                        Text="{Binding Email, Mode=TwoWay}"
+                        Grid.Column="1" 
+                        HorizontalAlignment="Left" 
+                        Margin="446,443,0,0" 
+                        TextWrapping="Wrap" 
+                        VerticalAlignment="Top" 
+                        Width="225" 
+                        Height="57" 
+                        TextAlignment="Center"/>
+                    <Rectangle 
+                        Grid.Column="1" 
+                        HorizontalAlignment="Left" 
+                        Height="150" 
+                        Margin="776,368,0,0" 
+                        Stroke="Black" 
+                        VerticalAlignment="Top" 
+                        Width="300" 
+                        Fill="#FFF9F9F9"/>
+                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="890,406,0,0" TextWrapping="Wrap" Text="ТЕЛЕФОН" VerticalAlignment="Top" Width="71" Height="23" FontSize="14" TextAlignment="Center"/>
+                    <TextBox 
+                        Text="{Binding Phone, Mode=TwoWay}"
+                        TextWrapping="Wrap"
+                        Grid.Column="1" 
+                        HorizontalAlignment="Left" 
+                        Margin="811,443,0,0" 
+                        VerticalAlignment="Top" 
+                        Width="225" 
+                        Height="57" 
+                        TextAlignment="Center"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

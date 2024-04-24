@@ -1,0 +1,38 @@
+﻿@model AuthServer.Models.Requests.FWLoginRequest
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_Layout";
+}
+<!-- Signup-->
+<section class="signup-section">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5">
+            <div class="col-md-10 col-lg-8 mx-auto text-center">
+                <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+                <h2 class="text-white mb-5">Вход в систему</h2>
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- * * SB Forms Contact Form * *-->
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- This form is pre-integrated with SB Forms.-->
+                <!-- To make this form functional, sign up at-->
+                <!-- https://startbootstrap.com/solution/contact-forms-->
+                <!-- to get an API token!-->
+                <form class="form-signup" asp-action="Login" asp-antiforgery="true">
+                    <!-- Email address input-->
+                    <div class="row input-group-newsletter">
+                        <div class="col"><input asp-for="UserName" class="form-control" placeholder="Login" /></div>
+                        <div class="col"><input asp-for="Password" class="form-control" placeholder="Password" /></div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary">Войти</button>
+                        </div>
+                    </div>                    
+                    <!-- Submit success message-->
+                    <!---->
+                    <!-- This is what your users will see when the form-->
+                    <!-- has successfully submitted-->
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

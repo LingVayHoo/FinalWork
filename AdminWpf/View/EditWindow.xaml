@@ -1,0 +1,81 @@
+﻿<Window x:Class="AdminWpf.View.EditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdminWpf"
+        xmlns:mvvm="clr-namespace:AdminWpf.Models.Content.WorkTable.MVVM" d:DataContext="{d:DesignInstance Type=mvvm:WTViewModel}"
+        mc:Ignorable="d"
+        Title="EditWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="57*"/>
+            <RowDefinition Height="61*"/>
+            <RowDefinition Height="181*"/>
+            <RowDefinition Height="58*"/>
+            <RowDefinition Height="77*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="163*"/>
+            <ColumnDefinition Width="637*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock 
+            HorizontalAlignment="Center" 
+            TextWrapping="Wrap" 
+            Text="Имя" 
+            Height="37" 
+            Width="143" 
+            FontSize="22" 
+            VerticalAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Email" Height="37" Width="143" FontSize="22" VerticalAlignment="Center" Grid.Row="1"/>
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Текст обращения" Height="64" Width="143" FontSize="22" VerticalAlignment="Center" Grid.Row="2"/>
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Статус" Height="37" Width="143" FontSize="22" VerticalAlignment="Center" Grid.Row="3"/>
+        <TextBox 
+            x:Name="NameField"
+            Text="{Binding SelectedRequest.Name}"
+            Grid.Column="1" 
+            HorizontalAlignment="Center" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Center" 
+            Width="617" 
+            Height="37" 
+            FontSize="22"/>
+        <TextBox 
+            x:Name="EmailField" 
+            Text="{Binding SelectedRequest.Email}"
+            Grid.Column="1" 
+            HorizontalAlignment="Center" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Center" 
+            Width="617" 
+            Height="37" 
+            Grid.Row="1" 
+            FontSize="22"/>
+        <TextBox 
+            x:Name="TextField" 
+            Text="{Binding SelectedRequest.Description}"
+            Grid.Column="1" 
+            HorizontalAlignment="Center" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Center" 
+            Width="617" 
+            Height="161" 
+            Grid.Row="2" 
+            FontSize="16"/>
+        <Button x:Name="OkButton" Grid.Column="1" Content="Ok" HorizontalAlignment="Left" Margin="141,0,0,0" Grid.Row="4" VerticalAlignment="Center" Height="28" Width="192" FontSize="18"/>
+        <ComboBox 
+            x:Name="StatusBox" 
+            Grid.Column="1" 
+            HorizontalAlignment="Left" 
+            Margin="11,0,0,0" 
+            Grid.Row="3" 
+            VerticalAlignment="Center" 
+            Width="265" 
+            Height="37" 
+            FontSize="20"
+            ItemsSource="{Binding Statuses}"
+            SelectedItem="{Binding SelectedRequest.RequestStatus}"
+            >
+        </ComboBox>
+    </Grid>
+</Window>

@@ -1,0 +1,33 @@
+﻿@using AuthServer.Models.Content.Blog
+@model IEnumerable<FWBlogItem>
+@{
+    ViewData["Title"] = "Blog";
+    Layout = "_Layout";
+}
+@if (Model.Count() > 0)
+{
+    <section class="about-section text-center" id="about">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <h2 class="text-uppercase text-white mb-4">Новости семьи</h2>
+                @if (@Model.Count() > 0)
+                {
+                    @for (int i = 0; i < Model.Count(); i++)
+                    {
+                    <div class="col-lg-8">
+                            <h1 class="small text-white-50">@Model.ElementAt(i).PublicationDate</h1>
+                        <h2 class="text-white mb-4">@Model.ElementAt(i).Title</h2>
+                        <p class="text-white-50">
+                            @Model.ElementAt(i).ShortDescription
+                            <a class="nav-link small text-white-50"
+                               href="@Url.Action("Details", "Blog", new { id = Model.ElementAt(i).Id.ToString()})">Подробнее</a>
+                        </p>
+                    </div>
+                    }
+                }
+            </div>
+            <img class="img-fluid" src='~/lib/img/BlogBG.png' alt="..." />
+        </div>
+    </section>
+    
+}

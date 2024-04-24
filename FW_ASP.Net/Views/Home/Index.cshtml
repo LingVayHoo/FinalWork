@@ -1,0 +1,52 @@
+﻿@model FW_ASP.Net.Models.MainPageModel
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+<header class="masthead">
+    <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+        <div class="d-flex justify-content-center">
+            <div class="text-center">
+                <h1 class="mx-auto my-0 text-uppercase">@Model.Title.MainTitle</h1>
+                <h2 class="text-white-50 mx-auto mt-2 mb-5">@Model.Title.QuoteTitle</h2>
+                <a class="btn btn-primary" href="#signup">@Model.Title.ButtonTitle</a>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="signup-section" id="signup">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5">
+            <div class="col-md-10 col-lg-8 mx-auto text-center">
+                <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+                <h2 class="text-white mb-5">Оставить заявку</h2>
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- * * SB Forms Contact Form * *-->
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- This form is pre-integrated with SB Forms.-->
+                <!-- To make this form functional, sign up at-->
+                <!-- https://startbootstrap.com/solution/contact-forms-->
+                <!-- to get an API token!-->
+                <form class="form-signup" asp-action="PostRequest" asp-antiforgery="false">
+                    <div class="row input-group-newsletter">
+                        <div class="col"><input asp-for="WRequest.Name" class="form-control" placeholder="Имя" /></div>
+                        <div class="col"><input asp-for="WRequest.Email" class="form-control" placeholder="Email" /></div>
+                    </div>
+                    <div class="row input-group-newsletter mt-2">
+                        <div class="col"><input asp-for="WRequest.Description" class="form-control" placeholder="Текст сообщения" /></div>
+                    </div>
+                    <div class="row input-group-newsletter mt-2">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary">Отправить</button>
+                        </div>
+                    </div>
+                    <!-- Submit success message-->
+                    <!---->
+                    <!-- This is what your users will see when the form-->
+                    <!-- has successfully submitted-->
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

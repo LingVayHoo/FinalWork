@@ -1,0 +1,62 @@
+﻿@using AuthServer.Models.Content.Services
+@model IEnumerable<FWService>
+@{
+    ViewData["Title"] = "Services";
+    Layout = "_Layout";
+}
+
+<section class="contact-section bg" style="background-image: url('/lib/img/ServiceBG.jpg'); width: 100%; height: 100vh; background-repeat: no-repeat; background-size: cover;">
+    <div class="container px-4 px-lg-5 d-flex h-50 align-items-center justify-content-center">
+        <div class="d-flex justify-content-center">
+            <div class="text-center">
+                <h1 class="mx-auto my-0 text-light text-uppercase">Услуги</h1>
+                <h2 class="text-white-50 mx-auto mt-2 mb-5">Ничего личного, это просто бизнес</h2>
+            </div>
+        </div>
+    </div>
+    @if (Model.Count() > 0)
+    {
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 mt-lg-4">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase text-black m-0">@Model.ElementAt(0).Title</h4>
+                            <hr class="my-4 mx-auto" />
+                            <li class="nav-item"><a class="nav-link small text-black-50" href="@Url.Action("Details", "Services", new { id = Model.ElementAt(0).Id.ToString()})">Подробнее</a></li>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.Count() > 1)
+                {
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <h4 class="text-uppercase text-black m-0">@Model.ElementAt(1).Title</h4>
+                                <hr class="my-4 mx-auto" />
+                                <li class="nav-item"><a class="nav-link small text-black-50" href="@Url.Action("Details", "Services", new { id = Model.ElementAt(1).Id.ToString()})">Подробнее</a></li>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (Model.Count() > 2)
+                {
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <h4 class="text-uppercase text-black m-0">@Model.ElementAt(2).Title</h4>
+                                <hr class="my-4 mx-auto" />
+                                <li class="nav-item"><a class="nav-link small text-black-50" href="@Url.Action("Details", "Services", new { id = Model.ElementAt(2).Id.ToString()})">Подробнее</a></li>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</section>
+
+
+
+
+
